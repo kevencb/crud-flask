@@ -1,0 +1,15 @@
+{% extends "template.html" %}
+
+{% block header %}FlaskStore{% endblock %}
+
+{% block list %}
+<h2>Nuevo Producto</h2>
+<section>
+    <form action="/" method="POST">
+        <input type="text" name="brand" placeholder="Marca" required>
+        <input type="text" name="model" placeholder="Modelo" required>
+        <input type="number" name="price" placeholder="Precio" step="0.01">
+        <button type="submit">Agregar</button>
+    </form>
+</section>
+{% endblock %}

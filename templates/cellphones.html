@@ -1,0 +1,15 @@
+{% extends "template.html" %}
+{% block header %}Lista de Celulares{% endblock %}
+
+{% block list %}
+<ul>
+    {% for cellphone in cellphones %}
+    <li>
+        <span>ID:</span> {{ cellphone.id }}<br>
+        <span>Modelo:</span> {{ cellphone.model }} <br>
+        <span>Marca:</span> {{ cellphone.brand }} <br>
+        <span>Precio:</span> ${{ cellphone.price }} USD
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

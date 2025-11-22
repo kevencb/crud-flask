@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block header %}Lista de Proveedores{% endblock %}
+
+{% block list %}
+<ul>
+    {% for supplier in suppliers %}
+    <li>
+        <span>ID:</span> {{ supplier.id }}<br>
+        <span>Nombre:</span> {{ supplier.name }} <br>
+        <span>Contacto:</span> {{ supplier.contact }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

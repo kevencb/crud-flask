@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block header %}Lista de Clientes{% endblock %}
+
+{% block list %}
+<ul>
+    {% for customer in customers %}
+    <li>
+        <span>ID:</span> {{ customer.id }}<br>
+        <span>Nombre:</span> {{ customer.name }} <br>
+        <span>Email:</span> {{ customer.email }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

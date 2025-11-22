@@ -1,15 +1,16 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 
 app = Flask(__name__)
+app.secret_key = "flask_store"
 
 cellphones = [
     {"id": 1, "brand": "Apple", "model": "iPhone 13", "price": 799},
-    {"id": 2, "brand": "Samsung", "model": "Galaxy S21", "price": 699},
-    {"id": 3, "brand": "Google", "model": "Pixel 6", "price": 599},
+    {"id": 2, "brand": "Samsung", "model": "Galaxy S22", "price": 699},
+    {"id": 3, "brand": "Google", "model": "Pixel 7", "price": 599},
 ]
 
 customers = [
-    {"id": 1, "name": "Alice", "email": "alice@example.com"},
+{   "id": 1, "name": "Alice", "email": "alice@example.com"},
     {"id": 2, "name": "Bob", "email": "bob@example.com"},
     {"id": 3, "name": "Charlie", "email": "charlie@example.com"},
 ]
@@ -24,7 +25,34 @@ suppliers = [
 def home():
     return render_template('index.html')
 
-#**** CELLPHONES ******
+# @app.route('/customers')
+# def list_customers():
+#     return render_template("customers.html", customers = customers)
+
+# @app.route('/cellphones')
+# def list_cellphones():
+#     return render_template("cellphones.html", cellphones = cellphones)
+
+# @app.route('/suppliers')
+# def list_suppliers():
+#     return render_template("suppliers.html", suppliers = suppliers)
+
+# #**** FORMULARIO ******
+# @app.post('/')
+# def create_cellphone():
+#     global cellphones
+#     new_id = len(cellphones) + 1
+#     new_cellphone = {
+#         "id": new_id,
+#         "brand": request.form["brand"],
+#         "model": request.form["model"],
+#         "price": float(request.form["price"]),
+#     }
+#     cellphones.append(new_cellphone)
+#     flash("Celular agregado correctamente 🎉")
+#     return redirect(url_for("get_cellphones"))
+
+#**** CRUD CELLPHONES ******
 #Cargar todos los celulares
 @app.route('/cellphones', methods=['GET'])
 def get_cellphones():
@@ -65,7 +93,7 @@ def delete_cellphone(id):
     return jsonify({"error": "Cellphone not found"}), 404
 
 
-#**** CUSTOMERS ******
+#**** CRUD CUSTOMERS ******
 #Cargar todos los clientes
 @app.route('/customers', methods=['GET'])
 def get_customers():
@@ -106,7 +134,7 @@ def delete_customer(id):
     return jsonify({"error": "Customer not found"}), 404
 
 
-#**** SUPPLIERS ******
+#**** CRUD SUPPLIERS ******
 #Cargar todos los proveedores
 @app.route('/suppliers', methods=['GET'])
 def get_suppliers():
@@ -145,6 +173,7 @@ def delete_supplier(id):
         suppliers.remove(supplier)
         return jsonify({"message": "Supplier removed"}), 200
     return jsonify({"error": "Supplier not found"}), 404
+
 
 
 if __name__ == "__main__":
